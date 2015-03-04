@@ -68,6 +68,7 @@ EOM
 
     // The formatting rule on location reference is all upper and trim it
     $options['reference'] = strtoupper(trim($options['reference']));
+    if (!$options['zip_code']) { $options['zip_code'] = 0; }
 
     // check to see if the campus already exists
     list($status, $rows, $loc) = ona_get_location_record(array('reference' => $options['reference']));

@@ -149,7 +149,7 @@ function subnet_add($options="") {
     printmsg('DEBUG => subnet_add('.$options.') called', 3);
 
     // Version - UPDATE on every edit!
-    $version = '1.05';
+    $version = '1.06';
 
     // Parse incoming options string to an array
     $options = parse_options($options);
@@ -304,6 +304,8 @@ EOM
         }
         printmsg("VLAN selected: {$vlan['name']} in {$vlan['vlan_campus_name']} campus", 1);
         $SET['vlan_id'] = $vlan['id'];
+    } else {
+        $SET['vlan_id'] = 0;
     }
 
     // Sanitize "name" option
@@ -334,6 +336,9 @@ EOM
     }
     printmsg("DEBUG => ID for new subnet: " . $id, 1);
     $SET['id'] = $id;
+
+    // default network role id
+    $SET['network_role_id'] = 0;
 
     // Insert the new subnet  record
     list($status, $rows) = db_insert_record(
@@ -384,7 +389,7 @@ function subnet_modify($options="") {
     //printmsg('DEBUG => subnet_modify('.implode (";",$options).') called', 3);
 
     // Version - UPDATE on every edit!
-    $version = '1.06';
+    $version = '1.07';
 
     // Parse incoming options string to an array
     $options = parse_options($options);
@@ -640,7 +645,7 @@ EOM
     // Set options['set_vlan']?
     if (array_key_exists('set_vlan', $options) or $options['campus']) {
         if (!$options['set_vlan'])
-            $SET['vlan_id'] = '';
+            $SET['vlan_id'] = 0;
         else {
             // Find the VLAN ID from $options[set_vlan] and $options[campus]
             list($status, $rows, $vlan) = ona_find_vlan($options['set_vlan'], $options['campus']);

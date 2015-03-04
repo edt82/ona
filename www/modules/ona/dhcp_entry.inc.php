@@ -43,7 +43,7 @@ function dhcp_entry_add($options="") {
     global $conf, $self, $onadb;
 
     // Version - UPDATE on every edit!
-    $version = '1.03';
+    $version = '1.04';
 
     printmsg("DEBUG => dhcp_entry_add({$options}) called", 3);
 

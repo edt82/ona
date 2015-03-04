@@ -190,6 +190,11 @@ function ws_save($window_name, $form='') {
     $response = new xajaxResponse();
     $js = '';
 
+    if (!is_numeric($form['number'])) {
+        $self['error'] = "ERROR => dhcp_option_editor() Number value required";
+        printmsg($self['error'], 0);
+    }
+
     // If you get a numeric in $form, update the record
     if (is_numeric($form['id'])) {
 
@@ -248,6 +253,7 @@ function ws_save($window_name, $form='') {
                                                       'display_name' => $form['display_name'],
                                                       'type' => $form['type'],
                                                       'number' => $form['number'],
+                                                      'sys_default' => 0,
                                                       'name' => $form['name'])
                                                );
             if ($status or !$rows) {

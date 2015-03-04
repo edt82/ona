@@ -512,7 +512,7 @@ if ($install_submit == 'Y' && !isset($upgrade)) {
 <?xml version="1.0"?>
 <schema version="0.3">
 <sql>
-    <query>INSERT INTO domains (id,name,admin_email,default_ttl,refresh,retry,expiry,minimum) VALUES (1,'{$default_domain}','hostmaster', 86400, 86400, 3600, 3600, 3600)</query>
+    <query>INSERT INTO domains (id,parent_id,serial,name,admin_email,default_ttl,refresh,retry,expiry,minimum) VALUES (1,0,'','{$default_domain}','hostmaster', 86400, 86400, 3600, 3600, 3600)</query>
     <query>UPDATE sys_config SET value='{$default_domain}' WHERE name like 'dns_defaultdomain'</query>
 </sql>
 </schema>
