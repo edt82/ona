@@ -29,8 +29,11 @@ $xajaxProcReq='processRequests';
 
 
 
-
-$xajax = new xajax();
+$uri = '';
+if (!emtpy($config_xajaxUri)){
+    $uri = $config_xajaxUri;
+}
+$xajax = new xajax({$uri});
 
 
 
